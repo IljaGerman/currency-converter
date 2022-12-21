@@ -1,0 +1,50 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="ilya">
+        <createTable tableName="currency_rate">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" primaryKeyName="id_pk"/>
+            </column>
+            <column name="from_title" type="varchar(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="to_title" type="varchar(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rate" type="double">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint tableName="currency_rate" columnNames="from_title, to_title"/>
+    </changeSet>
+    <changeSet author="ilya" id="2">
+        <insert tableName="currency_rate">
+            <column name="from_title" value="USD"/>
+            <column name="to_title" value="EUR"/>
+            <column name="rate" value="0.87"/>
+        </insert>
+        <insert tableName="currency_rate">
+            <column name="from_title" value="EUR"/>
+            <column name="to_title" value="USD"/>
+            <column name="rate" value="1.13"/>
+        </insert>
+        <insert tableName="currency_rate">
+            <column name="from_title" value="USD"/>
+            <column name="to_title" value="BYN"/>
+            <column name="rate" value="2.5"/>
+        </insert>
+        <insert tableName="currency_rate">
+            <column name="from_title" value="BYN"/>
+            <column name="to_title" value="USD"/>
+            <column name="rate" value="0.4"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
