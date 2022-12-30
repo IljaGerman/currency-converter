@@ -20,6 +20,7 @@ public class CurrencyController {
     }
 
     @GetMapping("/api/v1/currency/convert")
+    @Secured("ROLE_USER")
     public double convertCurrency(@RequestParam double value,
                                   @RequestParam String from,
                                   @RequestParam String to) {
@@ -35,6 +36,7 @@ public class CurrencyController {
     }
 
     @GetMapping("/api/v1/currencyRates")
+    @Secured("ROLE_USER")
     public Page<CurrencyRate> findAll(Pageable pageable, SearchCriteria searchCriteria) {
         return currencyService.findAll(pageable, searchCriteria);
     }
