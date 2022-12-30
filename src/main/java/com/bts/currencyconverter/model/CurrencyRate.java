@@ -1,11 +1,14 @@
 package com.bts.currencyconverter.model;
 
-import javax.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.LastModifiedDate;
 
-@Table
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Table(name = "currency_rate")
 @Entity
 public class CurrencyRate {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -16,6 +19,17 @@ public class CurrencyRate {
     private String toTitle;
     @Column
     private Double rate;
+
+    @Column
+    private Long userId;
+
+    @CreationTimestamp
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
+    @LastModifiedDate
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
 
     public Long getId() {
         return id;
@@ -47,5 +61,29 @@ public class CurrencyRate {
 
     public void setRate(Double rate) {
         this.rate = rate;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public LocalDateTime getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(LocalDateTime updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
